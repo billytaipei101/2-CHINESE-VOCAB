@@ -1,6 +1,13 @@
-function [] = vocab(lab1,n)
-    % input example lab1= 1 % for opening XA_1 ADJECTIVES and n = 10, for
-    % presenting the first 10 words in that document
+function [] = vocab(xc,lab1,n)
+    % This function present a list of words given a grammatical/syntactical category, the 
+    % main entries are:
+    %    xc   -> Chinese characters, either 1 = Traditional, 2 = Simplified;
+    %    lab1 -> one of the grammatical/syntactical categories from the list below;
+    %    n    -> number of words to be presented.
+    % Other options can be modified within the script.
+    
+    % INPUT example xc = 1, traditional Chinese, lab1= 1 % for opening XA_1 ADJECTIVES and n = 10, for
+    % presenting the first 10 words in that document using traditional characters 'vocab(1,1,10)'
     % Chinese vocabulary
     %   01 ADJECTIVES                41  NPEOPLE PESONALPRONOUN    81  TIME
     %   02 ADJECTIVES PEOPLE         42  NPEOPLE PROFESSION        82  TIME DAY
@@ -45,11 +52,7 @@ function [] = vocab(lab1,n)
                     
     % Frequent errors|warnings:
     %  - Frequent errors include not finding the font for drawing the text;
-    %    in that case run d=listfonts in MAC for list of available fonts
-    
-    % NEXT STEP
-    % either modify 2 corpus file to include the missing words or exclude it to set a
-    % fixed time presentation which could be 2 seconds or so
+    %    in that case run d=listfonts in MAC for list of available fonts in your system
     
     %% Step 0 Special commands W
     % test
@@ -57,47 +60,44 @@ function [] = vocab(lab1,n)
     %n = 20;
     % end test
     mode   =  1;
-    %   mode : If mode = 1, the system uses Mei Jia Voice at 160 and also
-    %                     either the English or Spanish Voice at 160
+    %   mode : If mode = 1, the system uses either Mei Jia or Ting-Ting Voice at 185 and also
+    %                       either the English \ Spanish or Japanese Voice at 185
     %          If mode = 2, the presentation time of each word is 2 sec without translations
-    %          If mode = 3, waits for any key to be pressed before
-    %                       continuing to the next
-    roman = 1; 
-    %  roman : If roman = 1 English
-    %          If roman = 2 Spanish
-    % non roman. If roman = 3 Japanese # UNDER CONSTRUCTION
+    %          If mode = 3, the system uses either Mei Jia or Ting-Ting Voice at 185
+    %                       without translations and awaits for any key to be pressed before
+    %                       continuing to the next word.
+    roman = 2; 
+    %  roman :   If roman = 1 English
+    %            If roman = 2 Spanish
+    % non roman. If roman = 3 Japanese (Japanese translations might not be accurate and need to be revised in the future)
     %bgco_x = [1 2 3 4];
     %bgco  = randsample(bgco_x, 1);
     bgco = 2;
-    %  bgco  : Background / font color combinations
-    %          If bgco = 1 pink / light purple
-    %          If bgco = 2 white / light green
-    %          If bgco = 3 white / black
-    %          If bgco = 4 light orange / pink
+    %  bgco  : Background / font color combinations; see the different combinations of 
+    %          complementary colors below
     
     %% Step 1 Function Inputs
     
-    AssertOpenGL;        % Making sure the script is running on Psychtoolbox-3:
+    AssertOpenGL;             % Making sure the script is running on Psychtoolbox-3:
     cd '/Users/williamcruz/Documents/MATLAB/0 Chinese multivocab'
     T     = dataset('XLSFile','a guide.xls','ReadObsNames',true);
     newT  = T(T.proxy==lab1,:);
     file  = newT.t_file(1);   % is a cell array
-    sheet = newT.t_sheet(1); % is a numeric value
+    sheet = newT.t_sheet(1);  % is a numeric value
     
     %% Step 2 Color Settings
-    % Background / color font combinations
+    % Background / color font combinations using complementary pairs
+    % Complementary Cheking using this website
+    % https://rgbcolorcode.com
     if bgco == 1
-        color1 = [235,79 ,132]; % pink
-        color2 = [95 ,80 ,162]; % purple pastel
+        color01 = [255,153,204]; % Carnation pink  (Complementary checked)
+        color02 = [153,255,204]; % Magic Mind      (Complementary checked)
     elseif bgco == 2
-        color1 = [255,255,255]; % white
-        color2 = [108,196,154]; % green pastel
+        color01 = [235,79 ,132]; % Medium slate blue (Complementary checked)
+        color02 = [255,255,102]; % Unmellow Yellow   (Complementary checked)
     elseif bgco == 3
-        color1 = [255,255,255]; % white
-        color2 = [1  ,1  ,1  ]; % black
-    elseif bgco == 4
-        color1 = [252,187,129]; % light orange
-        color2 = [235,79 ,132]; % pink
+        color01 = [255,255,255]; % white
+        color02 = [1  ,1  ,1  ]; % black
     end
     
     % when working with the PTB enclose the whole body of your program
@@ -110,18 +110,23 @@ function [] = vocab(lab1,n)
             n = size(txt,1);
         end
         
-        chitext   = char(txt(1:n,2));
+        if xc == 1      % Traditional Chinese
+            chitext = char(txt(1:n,2));
+        elseif xc == 2  % Simplified Chinese
+            chitext = char(txt(1:n,5));
+        end
+        
         if roman == 1
             engli = txt(1:n,1);
         elseif roman == 2
             engli = txt(1:n,3);
         elseif roman == 3
-            engli = txt(1:n,4);
+            engli = char(txt(1:n,4));
         end
         charsz  = 200;
         
         Screen('Preference', 'SkipSyncTests',1);
-        [w,rect] = Screen('OpenWindow', 0, color1); % Change to windows 0 default, 1 or 2
+        [w,rect] = Screen('OpenWindow', 0, color01); % Change to windows 0 default, 1 or 2
         cs       = rect(3:4)/2;
         Screen('Preference', 'TextRenderer', 2);
         Screen('Preference', 'TextAntiAliasing', 1);
@@ -150,67 +155,100 @@ function [] = vocab(lab1,n)
                 % end of inserting the image of the location
                 
                 Screen('TextSize',w, charsz);
-                Screen('TextFont',w,'PingFang TC');
-                % Songti SC \ Yuanti SC \ Yuanti TC \ STSong
-                % Improve reading speed = Yuanti SC \ PingFang TC
+                Screen('TextFont',w,'PingFang TC'); % Favortites: Yuanti SC % Heiti SC % PingFang TC
+                
+                % Songti SC \ Yuanti SC \ Yuanti TC \ STSong \ Kai \ Heiti SC \ Heiti TC \
+                % Improve reading speed = Yuanti SC \ PingFang TC \ LiHei Pro \ LingWai SC
+                % \ LingWai TC \ LiSong Pro \ PingFang HK \ PingFang SC \ PMingLiU \ 
+                % Songti TC \ STFangsong \ STHeiti \ STSong \ Xingkai SC \
+                % Xingkai TC \ 
+                
+                %% Fonts for displaying Japanese
+                % Hiragino Kaku Gothic Pro \ Hiragino Mincho Pro \ Hiragino Sans \ Meiryo
+                % \ Osaka \ YuKyokasho \ Yukyokasho Yoko \
                 
                 dummy = double(chitext(i,:));
                 dummy(dummy == 32) = [];
                 if length(dummy) == 1
-                    Screen('FillRect',w,color1,[xaxis-(charsz/2) yaxis xaxis+(charsz*2)+(charsz/2) yaxis+(charsz*2)])
-                    Screen('DrawText', w, double(chitext(i,:)),xaxis+(charsz/2) ,yaxis , color2);
+                    Screen('FillRect',w,color01,[xaxis-(charsz/2) yaxis xaxis+(charsz*2)+(charsz/2) yaxis+(charsz*2)])
+                    Screen('DrawText', w, double(chitext(i,:)),xaxis+(charsz/2) ,yaxis , color02);
                 elseif length(dummy) == 2
-                    Screen('FillRect',w,color1,[xaxis-(charsz/2) yaxis xaxis+(charsz*2)+(charsz/2) yaxis+(charsz*2)])
-                    Screen('DrawText', w, double(chitext(i,:)),xaxis ,yaxis , color2);
+                    Screen('FillRect',w,color01,[xaxis-(charsz/2) yaxis xaxis+(charsz*2)+(charsz/2) yaxis+(charsz*2)])
+                    Screen('DrawText', w, double(chitext(i,:)),xaxis ,yaxis , color02);
                 elseif length(dummy) == 3
-                    Screen('FillRect',w,color1,[xaxis-(charsz) yaxis xaxis+(charsz*2)+(charsz) yaxis+(charsz*2)])
-                    Screen('DrawText', w, double(chitext(i,:)),xaxis-(charsz/2) ,yaxis , color2);
+                    Screen('FillRect',w,color01,[xaxis-(charsz) yaxis xaxis+(charsz*2)+(charsz) yaxis+(charsz*2)])
+                    Screen('DrawText', w, double(chitext(i,:)),xaxis-(charsz/2) ,yaxis , color02);
                 elseif length(dummy) == 4
-                    Screen('FillRect',w,color1,[xaxis-(charsz*1.5) yaxis xaxis+(charsz*2)+(charsz*1.5) yaxis+(charsz*2)])
-                    Screen('DrawText', w, double(chitext(i,:)),xaxis-(charsz) ,yaxis , color2);
+                    Screen('FillRect',w,color01,[xaxis-(charsz*1.5) yaxis xaxis+(charsz*2)+(charsz*1.5) yaxis+(charsz*2)])
+                    Screen('DrawText', w, double(chitext(i,:)),xaxis-(charsz) ,yaxis , color02);
                 end
                 
-                charom = 70; % Defining Character size of roman as 70
-                Screen('TextSize', w, charom);
-                Screen('TextFont', w,'Euphemia UCAS');
-                xaxis2   = cs(1);
-                
+                 charom = 60; % Defining Character size of bridge language
+                 Screen('TextSize', w, charom);
+                 xaxis2   = cs(1);
+                 
                 if roman == 1 || roman == 2
+                    Screen('TextFont', w,'Euphemia UCAS');
                     dummy2 = strlength(engli(i,:));
-                    xaxis2 = xaxis2 - ((70 * dummy2)/3);
-                    Screen('DrawText', w, char(engli(i,:)),xaxis2,yaxis+250, color2);
+                    xaxis2 = xaxis2 - ((charom * dummy2)/3);
+                    Screen('DrawText', w, char(engli(i,:)),xaxis2,yaxis+250, color02);
                 elseif roman == 3
-                    % under construction for adding Japanese
+                    Screen('TextFont', w,'Hiragino Sans');
+                    dummy2 = double(engli(i,:));
+                    dummy2(dummy2 == 32) = [];
+                    dummy3 = length(dummy2); 
+                    xaxis2 = xaxis2 - ((charom * dummy3)/3);
+                    Screen('DrawText', w, double(engli(i,:)),xaxis2,yaxis+250, color02);
                 end
                 
                 Screen('Flip',w);
-                if mode == 1 % Presentation mode option A (Mei Jia)
+                if mode == 1 % Presentation mode option A
                     WaitSecs(0.2)
-                    feature('DefaultCharacterSet', 'UTF-8');
-                    feature('DefaultCharacterSet', 'UTF-8');
-                    str=char(chitext(i,:));
-                    system(sprintf('say -v Mei -r 185 %s', str));
-                    feature('DefaultCharacterSet', 'Big-5');
-                    feature('DefaultCharacterSet', 'Big-5');
+                    if xc == 1
+                       feature('DefaultCharacterSet', 'UTF-8');
+                       feature('DefaultCharacterSet', 'UTF-8');
+                       str=char(chitext(i,:));
+                       system(sprintf('say -v Mei -r 180 %s', str));
+                       feature('DefaultCharacterSet', 'Big-5');
+                       feature('DefaultCharacterSet', 'Big-5'); 
+                    elseif xc == 2
+                       feature('DefaultCharacterSet', 'UTF-8');
+                       feature('DefaultCharacterSet', 'UTF-8');
+                       str=char(chitext(i,:));
+                       system(sprintf('say -v Ting-Ting -r 180 %s', str));
+                       feature('DefaultCharacterSet', 'Big-5');
+                       feature('DefaultCharacterSet', 'Big-5');
+                    end
                     
                     if roman == 1
-                        system( sprintf('say -v Alex -r 185 %s', char(engli(i,:))));
+                        system( sprintf('say -v Alex -r 180 %s', char(engli(i,:))));
                     elseif roman == 2
-                        system( sprintf('say -v Soledad -r 185 %s', char(engli(i,:))));
+                        system( sprintf('say -v Soledad -r 180 %s', char(engli(i,:))));
                     elseif roman == 3
-                        system( sprintf('say -v Kyoko -r 185 %s',char('??????'))) % section under construction
+                        str2 = char(engli(i,:));
+                        system( sprintf('say -v Kyoko -r 180 %s', str2))
                     end
                     
                 elseif mode == 2 % Presentation mode option B (2 sec)
                     WaitSecs(2);
                 elseif mode == 3 % Presentation of the next word after pressing space bar
                     WaitSecs(0.2)
-                    feature('DefaultCharacterSet', 'UTF-8');
-                    feature('DefaultCharacterSet', 'UTF-8');
-                    str=char(chitext(i,:));
-                    system(sprintf('say -v Mei -r 185 %s', str));
-                    feature('DefaultCharacterSet', 'Big-5');
-                    feature('DefaultCharacterSet', 'Big-5');
+                    if xc == 1
+                        feature('DefaultCharacterSet', 'UTF-8');
+                        feature('DefaultCharacterSet', 'UTF-8');
+                        str=char(chitext(i,:));
+                        system(sprintf('say -v Mei -r 180 %s', str));
+                        feature('DefaultCharacterSet', 'Big-5');
+                        feature('DefaultCharacterSet', 'Big-5');
+                    elseif xc == 2
+                        feature('DefaultCharacterSet', 'UTF-8');
+                        feature('DefaultCharacterSet', 'UTF-8');
+                        str=char(chitext(i,:));
+                        system(sprintf('say -v Ting-Ting -r 180 %s', str));
+                        feature('DefaultCharacterSet', 'Big-5');
+                        feature('DefaultCharacterSet', 'Big-5');
+                    end
+                    
                     [~,~,~]=KbWait;
                     WaitSecs(0.2  );
                 end

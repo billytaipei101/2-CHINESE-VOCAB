@@ -7,8 +7,13 @@ ENGLISH
  
  Traditional Chinese - English
 01 ADJECTIVES
+https://www.youtube.com/watch?v=NNxFE3PVmTE
+
+ Simplified Chinese - Spanish
+02 ADJECTIVES PEOPLE
+https://www.youtube.com/watch?v=wOWnaadVYME
  
- For doing the videos above I recorded my screen while the program was running, but also included some adornments to the videos using a video editor software, such as titles as well as adding background music: binaural and Alpha waves songs which are told to improve concentration and memory while studying.
+ For doing the videos above I recorded my screen while the program was running, but also included some adornments to the videos using a video editor software, such as titles at the beginning and in the end as well as adding background music: binaural and Alpha waves songs which are known to improve concentration and memory while studying.
 
 ESPAÑOL
 # 2-CHINESE VOCAB
@@ -18,6 +23,11 @@ ESPAÑOL
  El script puede ser modificado de varias maneras incluyendo a) la presentación del lenguage objetivo (Simplificado & Tradicional), b) el lenguage puente el cual puede ser Ingles, Español o Japonés; c) el color tando de la fuente como del fondo; d) las voces del sistema y tambien su velocidad; e) añadir entradas via los archivos excel, and f) elegir entre tres modos de presentación explicados en detalle en el script. También es posible cambiar las fotografías utilizadas como fondo; la colección de fotos presentada aqui, representa diferentes sitios in la ciudad de Tainan - Taiwan. Algunas muestras de la presentación pueden ser vistas en el siguiente canal de Youtube.
  
  Chino Tradicional - Ingles
-01 ADJECTIVES
+01 ADJECTIVOS
+https://www.youtube.com/watch?v=NNxFE3PVmTE
+
+ Chino Simplificado - Español
+02 ADJECTIVOS PERSONAS
+https://www.youtube.com/watch?v=wOWnaadVYME
  
- Para hacer los videos anteriores grabé my pantalla mientras el programa estaba corriendo, pero tambien inclui algunos adornos utilizando un software para edición de video, tal como títulos y tambien como música de fondo algunos sonidos binaurales y ondas Alpha las cuales pueden mejorar la concentración y la memoria mientras se esta estudiando.
+ Para hacer los videos anteriores grabé my pantalla mientras el programa estaba corriendo, pero tambien inclui algunos adornos utilizando un software para edición de video, tal como títulos al principio y al final y tambien como música de fondo algunos sonidos binaurales y ondas Alpha las cuales pueden mejorar la concentración y la memoria mientras se estudia.

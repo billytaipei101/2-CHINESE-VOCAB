@@ -12,6 +12,10 @@ https://www.youtube.com/watch?v=NNxFE3PVmTE
  Simplified Chinese - Spanish
 02 ADJECTIVES PEOPLE
 https://www.youtube.com/watch?v=wOWnaadVYME
+
+ Tradition Chinese - Japanese
+05 ADVERBS QUANTITY
+https://www.youtube.com/watch?v=SwX_OkwkSns
  
  For doing the videos above I recorded my screen while the program was running, but also included some adornments to the videos using a video editor software, such as titles at the beginning and in the end as well as adding background music: binaural and Alpha waves songs which are known to improve concentration and memory while studying.
 
@@ -29,6 +33,10 @@ https://www.youtube.com/watch?v=NNxFE3PVmTE
  Chino Simplificado - Español
 02 ADJECTIVOS PERSONAS
 https://www.youtube.com/watch?v=wOWnaadVYME
+
+ Chino Tradicional - Japones
+05 ADVERBOS DE CANTIDAD
+https://www.youtube.com/watch?v=SwX_OkwkSns
  
  Para hacer los videos anteriores grabé my pantalla mientras el programa estaba corriendo, pero tambien inclui algunos adornos utilizando un software para edición de video, tal como títulos al principio y al final y tambien como música de fondo algunos sonidos binaurales y ondas Alpha las cuales pueden mejorar la concentración y la memoria mientras se estudia.
 

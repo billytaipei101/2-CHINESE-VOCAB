@@ -66,13 +66,13 @@ function [] = vocab(xc,lab1,n)
     %          If mode = 3, the system uses either Mei Jia or Ting-Ting Voice at 185
     %                       without translations and awaits for any key to be pressed before
     %                       continuing to the next word.
-    roman = 2; 
+    roman = 1; 
     %  roman :   If roman = 1 English
     %            If roman = 2 Spanish
     % non roman. If roman = 3 Japanese (Japanese translations might not be accurate and need to be revised in the future)
-    %bgco_x = [1 2 3 4];
-    %bgco  = randsample(bgco_x, 1);
-    bgco = 2;
+    bgco_x = [1 2 3 4 5 6 7 8 9];
+    bgco   = randsample(bgco_x, 1);
+    %bgco = 1;
     %  bgco  : Background / font color combinations; see the different combinations of 
     %          complementary colors below
     
@@ -98,6 +98,24 @@ function [] = vocab(xc,lab1,n)
     elseif bgco == 3
         color01 = [255,255,255]; % white
         color02 = [1  ,1  ,1  ]; % black
+    elseif bgco == 4
+        color01 = [51 ,153,255]; % Dodger blue (Complementary checked)
+        color02 = [255,153,51 ]; % Deep saffron(Complementary checked)
+    elseif bgco == 5
+        color01 = [77 ,225,255]; % Maya Blue         (Complementary checked)
+        color02 = [255,106,77 ]; % Outrageous orange (Complementary checked)
+    elseif bgco == 6
+        color01 = [128,255,191]; % Aquamarine      (Complementary checked)
+        color02 = [255,128,191]; % Persian pink    (Complementary checked)
+    elseif bgco == 7
+        color01 = [43 ,0  ,255]; % Electric Ultramarine (Complementary checked)
+        color02 = [212,255,0  ]; % Electric Lime        (Complementary checked)
+    elseif bgco == 8
+        color01 = [255,255,51 ]; % Yellow  (Complementary checked)
+        color02 = [51 ,51 ,255]; % Palatinate blue (Complementary checked)
+    elseif bgco == 9
+        color01 = [227,38 ,54 ]; % Alzarin Crimson (Complementary checked)
+        color02 = [39 ,227,211]; % Turquoise       (Complementary checked)
     end
     
     % when working with the PTB enclose the whole body of your program
@@ -221,7 +239,7 @@ function [] = vocab(xc,lab1,n)
                     end
                     
                     if roman == 1
-                        system( sprintf('say -v Alex -r 180 %s', char(engli(i,:))));
+                        system( sprintf('say -v Samantha -r 180 %s', char(engli(i,:)))); % Options Samantha / Alex
                     elseif roman == 2
                         system( sprintf('say -v Soledad -r 180 %s', char(engli(i,:))));
                     elseif roman == 3

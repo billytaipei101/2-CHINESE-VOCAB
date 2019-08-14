@@ -13,7 +13,7 @@ https://www.youtube.com/watch?v=NNxFE3PVmTE
 02 ADJECTIVES PEOPLE
 https://www.youtube.com/watch?v=wOWnaadVYME
 
- Tradition Chinese - Japanese
+ Traditional Chinese - Japanese
 05 ADVERBS QUANTITY
 https://www.youtube.com/watch?v=SwX_OkwkSns
  

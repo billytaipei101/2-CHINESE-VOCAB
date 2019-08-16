@@ -59,14 +59,14 @@ function [] = vocab(xc,lab1,n)
     %lab1 = 1;
     %n = 20;
     % end test
-    mode   =  1;
+    mode   =  3;
     %   mode : If mode = 1, the system uses either Mei Jia or Ting-Ting Voice at 185 and also
     %                       either the English \ Spanish or Japanese Voice at 185
     %          If mode = 2, the presentation time of each word is 2 sec without translations
     %          If mode = 3, the system uses either Mei Jia or Ting-Ting Voice at 185
     %                       without translations and awaits for any key to be pressed before
     %                       continuing to the next word.
-    roman = 1; 
+    roman = 2; 
     %  roman :   If roman = 1 English
     %            If roman = 2 Spanish
     % non roman. If roman = 3 Japanese (Japanese translations might not be accurate and need to be revised in the future)
@@ -141,6 +141,11 @@ function [] = vocab(xc,lab1,n)
         elseif roman == 3
             engli = char(txt(1:n,4));
         end
+        % test for pinyin
+        % pin = txt(1:n,6);
+        % charpin = 30;
+        % end test for pinyin
+        
         charsz  = 200;
         
         Screen('Preference', 'SkipSyncTests',1);
@@ -151,8 +156,8 @@ function [] = vocab(xc,lab1,n)
         Screen('Preference', 'TextAlphaBlending', 0);
         Screen('Preference', 'SuppressAllWarnings', 0);
         Screen('Preference', 'VisualDebugLevel', 1);
-        feature('DefaultCharacterSet', 'Big-5');
-        feature('DefaultCharacterSet', 'Big-5');
+        feature('DefaultCharacterSet', 'ISO-8859-1'); % Big-5 / UTF-8 / US-ASCII / ISO-8859-1
+        feature('DefaultCharacterSet', 'ISO-8859-1'); % Pinyin is displayed innaproperly and disregarded     
         Screen('TextStyle',w, 0);
         HideCursor(w)
         xaxis   = cs(1)-charsz;
@@ -200,6 +205,11 @@ function [] = vocab(xc,lab1,n)
                     Screen('FillRect',w,color01,[xaxis-(charsz*1.5) yaxis xaxis+(charsz*2)+(charsz*1.5) yaxis+(charsz*2)])
                     Screen('DrawText', w, double(chitext(i,:)),xaxis-(charsz) ,yaxis , color02);
                 end
+                % test for pinyin
+                %Screen('TextSize', w, charpin);
+                %Screen('TextFont', w,'Hiragino Sans');
+                %Screen('DrawText', w, char(pin(i,:)),xaxis+(charsz/2) ,yaxis-(charpin/2), color02);
+                % end test for pinyin
                 
                  charom = 60; % Defining Character size of bridge language
                  Screen('TextSize', w, charom);
@@ -208,7 +218,7 @@ function [] = vocab(xc,lab1,n)
                 if roman == 1 || roman == 2
                     Screen('TextFont', w,'Euphemia UCAS');
                     dummy2 = strlength(engli(i,:));
-                    xaxis2 = xaxis2 - ((charom * dummy2)/3);
+                    xaxis2 = xaxis2 - ((charom * dummy2/4));
                     Screen('DrawText', w, char(engli(i,:)),xaxis2,yaxis+250, color02);
                 elseif roman == 3
                     Screen('TextFont', w,'Hiragino Sans');

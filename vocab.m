@@ -56,7 +56,7 @@ function [] = vocab(xc,lab1,n)
     
     %% Step 0 Special commands W
     % test
-    %lab1 = 1;
+    %lab1 = 46;
     %n = 20;
     % end test
     mode   =  3;
@@ -64,15 +64,19 @@ function [] = vocab(xc,lab1,n)
     %                       either the English \ Spanish or Japanese Voice at 185
     %          If mode = 2, the presentation time of each word is 2 sec without translations
     %          If mode = 3, the system uses either Mei Jia or Ting-Ting Voice at 185
-    %                       without translations and awaits for any key to be pressed before
+    %                       with translations and awaits for any key to be pressed before
     %                       continuing to the next word.
-    roman = 2; 
+    roman = 1; 
     %  roman :   If roman = 1 English
     %            If roman = 2 Spanish
-    % non roman. If roman = 3 Japanese (Japanese translations might not be accurate and need to be revised in the future)
+    % non roman: If roman = 3 Japanese (Japanese translations might not be accurate and need to be revised in the future)
+    rd1  = 0;  % a value to indicate whether to select the words randomly from the grammatical/lexical category or not 1 = yes / 0 = no
+    rd_x = [1 2];
+    rd2  = randsample(rd_x,1);
+    
     bgco_x = [1 2 3 4 5 6 7 8 9];
     bgco   = randsample(bgco_x, 1);
-    %bgco = 1;
+    %bgco = 1; 
     %  bgco  : Background / font color combinations; see the different combinations of 
     %          complementary colors below
     
@@ -90,34 +94,78 @@ function [] = vocab(xc,lab1,n)
     % Complementary Cheking using this website
     % https://rgbcolorcode.com
     if bgco == 1
-        color01 = [255,153,204]; % Carnation pink  (Complementary checked)
-        color02 = [153,255,204]; % Magic Mind      (Complementary checked)
+        if rd2 == 1
+            color01 = [255,153,204]; % Carnation pink  (Complementary checked)
+            color02 = [153,255,204]; % Magic Mind      (Complementary checked)
+        elseif rd2 == 2
+            color02 = [255,153,204]; % Carnation pink  (Complementary checked)
+            color01 = [153,255,204]; % Magic Mind      (Complementary checked)
+        end
     elseif bgco == 2
-        color01 = [235,79 ,132]; % Medium slate blue (Complementary checked)
-        color02 = [255,255,102]; % Unmellow Yellow   (Complementary checked)
+        if rd2 == 1
+            color01 = [235,79 ,132]; % Medium slate blue (Complementary checked)
+            color02 = [255,255,102]; % Unmellow Yellow   (Complementary checked)
+        elseif rd2 == 2
+            color02 = [235,79 ,132]; % Medium slate blue (Complementary checked)
+            color01 = [255,255,102]; % Unmellow Yellow   (Complementary checked)
+        end
     elseif bgco == 3
-        color01 = [255,255,255]; % white
-        color02 = [1  ,1  ,1  ]; % black
+        if rd2 == 1
+            color01 = [255,255,255]; % white
+            color02 = [1  ,1  ,1  ]; % black
+        elseif rd2 == 2
+            color02 = [255,255,255]; % white
+            color01 = [1  ,1  ,1  ]; % black
+        end
     elseif bgco == 4
-        color01 = [51 ,153,255]; % Dodger blue (Complementary checked)
-        color02 = [255,153,51 ]; % Deep saffron(Complementary checked)
+        if rd2 == 1
+            color01 = [51 ,153,255]; % Dodger blue (Complementary checked)
+            color02 = [255,153,51 ]; % Deep saffron(Complementary checked)
+        elseif rd2 == 2
+            color02 = [51 ,153,255]; % Dodger blue (Complementary checked)
+            color01 = [255,153,51 ]; % Deep saffron(Complementary checked)
+        end
     elseif bgco == 5
-        color01 = [77 ,225,255]; % Maya Blue         (Complementary checked)
-        color02 = [255,106,77 ]; % Outrageous orange (Complementary checked)
+        if rd2 == 1
+            color01 = [77 ,225,255]; % Maya Blue         (Complementary checked)
+            color02 = [255,106,77 ]; % Outrageous orange (Complementary checked)
+        elseif rd2 == 2
+            color02 = [77 ,225,255]; % Maya Blue         (Complementary checked)
+            color01 = [255,106,77 ]; % Outrageous orange (Complementary checked)
+        end
     elseif bgco == 6
-        color01 = [128,255,191]; % Aquamarine      (Complementary checked)
-        color02 = [255,128,191]; % Persian pink    (Complementary checked)
+        if rd2 == 1
+            color01 = [128,255,191]; % Aquamarine      (Complementary checked)
+            color02 = [255,128,191]; % Persian pink    (Complementary checked)
+        elseif rd2 == 2
+            color02 = [128,255,191]; % Aquamarine      (Complementary checked)
+            color01 = [255,128,191]; % Persian pink    (Complementary checked)
+        end
     elseif bgco == 7
-        color01 = [43 ,0  ,255]; % Electric Ultramarine (Complementary checked)
-        color02 = [212,255,0  ]; % Electric Lime        (Complementary checked)
+        if rd2 == 1
+            color01 = [43 ,0  ,255]; % Electric Ultramarine (Complementary checked)
+            color02 = [212,255,0  ]; % Electric Lime        (Complementary checked)
+        elseif rd2 == 2
+            color02 = [43 ,0  ,255]; % Electric Ultramarine (Complementary checked)
+            color01 = [212,255,0  ]; % Electric Lime        (Complementary checked)
+        end
     elseif bgco == 8
-        color01 = [255,255,51 ]; % Yellow  (Complementary checked)
-        color02 = [51 ,51 ,255]; % Palatinate blue (Complementary checked)
+        if rd2 == 1
+            color01 = [255,255,51 ]; % Yellow  (Complementary checked)
+            color02 = [51 ,51 ,255]; % Palatinate blue (Complementary checked)
+        elseif rd2 == 2
+            color02 = [255,255,51 ]; % Yellow  (Complementary checked)
+            color01 = [51 ,51 ,255]; % Palatinate blue (Complementary checked)
+        end
     elseif bgco == 9
-        color01 = [227,38 ,54 ]; % Alzarin Crimson (Complementary checked)
-        color02 = [39 ,227,211]; % Turquoise       (Complementary checked)
+        if rd2 == 1
+            color01 = [227,38 ,54 ]; % Alzarin Crimson (Complementary checked)
+            color02 = [39 ,227,211]; % Turquoise       (Complementary checked)
+        elseif rd2 == 2
+            color02 = [227,38 ,54 ]; % Alzarin Crimson (Complementary checked)
+            color01 = [39 ,227,211]; % Turquoise       (Complementary checked)
+        end
     end
-    
     % when working with the PTB enclose the whole body of your program
     % in a try ... catch ... end construct to prevent you from getting stuck
     % in the PTB full screen mode
@@ -126,6 +174,11 @@ function [] = vocab(xc,lab1,n)
         [~,txt,~] = xlsread(string(file),sheet); 
         if  n > size(txt,1)
             n = size(txt,1);
+        end
+        % Are the words selected randomly?
+        if rd1 == 1
+            A = randsample(1:size(txt,1),n);
+            txt = txt(A,:);
         end
         
         if xc == 1      % Traditional Chinese
@@ -275,6 +328,15 @@ function [] = vocab(xc,lab1,n)
                         system(sprintf('say -v Ting-Ting -r 180 %s', str));
                         feature('DefaultCharacterSet', 'Big-5');
                         feature('DefaultCharacterSet', 'Big-5');
+                    end
+                    
+                    if roman == 1
+                        system( sprintf('say -v Samantha -r 180 %s', char(engli(i,:)))); % Options Samantha / Alex
+                    elseif roman == 2
+                        system( sprintf('say -v Soledad -r 180 %s', char(engli(i,:))));
+                    elseif roman == 3
+                        str2 = char(engli(i,:));
+                        system( sprintf('say -v Kyoko -r 180 %s', str2))
                     end
                     
                     [~,~,~]=KbWait;
